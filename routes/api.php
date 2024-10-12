@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CateController;
 use App\Http\Controllers\Api\RoleController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Http\Request;
@@ -23,18 +24,17 @@ Route::group(['middleware' => ['jwt.verify']], function() {
 Route::group([
     'prefix' => 'admin'
 ],function($route){
-
 // User CRUD
 Route::get('/users', [UserController::class, 'index']); 
 Route::get('/users/{id}', [UserController::class, 'show']); 
 Route::post('/users', [UserController::class, 'store']); 
 Route::put('/users/{id}', [UserController::class, 'update']);
 Route::delete('/users/{id}', [UserController::class, 'destroy']); 
-
 // Role Management
 Route::post('/users/{id}/roles', [UserController::class, 'assignRole']); 
 Route::delete('/users/{id}/roles', [UserController::class, 'removeRole']); 
 Route::put('/users/{id}/roles/sync', [UserController::class, 'syncRoles']); 
+
 });
 
 Route::group([
@@ -48,5 +48,14 @@ Route::group([
     Route::delete('delete/{id}',[RoleController::class,'destroy']);
 });
 
-
+Route::group([
+    'prefix' => 'cate'
+],function($route){
+    Route::get('getall',[CateController::class,'index']);
+    Route::get('getcatenull',[CateController::class,'getAllcateNull']);
+    Route::get('getbyid/{id}',[CateController::class,'show']);
+    Route::post('create',[CateController::class,'store']);
+    Route::put('update/{id}',[CateController::class,'update']);
+    Route::delete('delete/{id}',[CateController::class,'destroy']);
+});
 
