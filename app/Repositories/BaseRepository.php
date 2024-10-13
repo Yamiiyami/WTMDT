@@ -19,6 +19,7 @@ class BaseRepository
     public function find($id,$relations=[])
     {
         return $this->model->with($relations)->find($id);
+        
     }
 
     public function create(array $data)
