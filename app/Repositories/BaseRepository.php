@@ -117,9 +117,9 @@ class BaseRepository
         return $query->get();
     }
     
-    public function whereIn(string $column, array $values)
+    public function whereIn($relations = [], string $column, array $values)
     {
-        return $this->model->whereIn($column, $values)->get();
+        return $this->model->with($relations)->whereIn($column, $values)->get();
     }
 
     public function whereNotIn(string $column, array $values)

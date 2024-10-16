@@ -29,6 +29,7 @@ class ProductService{
     public function getById($id){
         $product = Product::with([
             'category',
+            'images',
             'variants.attributes.attribute',
             'variants.attributes.value'
         ])->findOrFail($id);
@@ -70,7 +71,7 @@ class ProductService{
 
         $cateids = $cates->pluck('id')->toArray();
         $cateids[] = $id;
-        $product = $this->productRepo->whereIn('category_id',$cateids);
+        $product = $this->productRepo->whereIn(['images'],'category_id',$cateids);
 
         return $product;
     }

@@ -7,5 +7,5 @@ interface IProductRepository{
     public function create(array $data);
     public function update($id, array $data);
     public function delete($id);
-    public function whereIn(string $column, array $values);
+    public function whereIn($relations =[],string $column, array $values);
 }
