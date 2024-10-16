@@ -29,6 +29,9 @@ class ImageController extends Controller
     public function store(Request $request){
 
         try{
+            if (!$request->hasFile('image')) {
+                return response()->json(['message' => 'không tìm thấy ảnh trong yêu cầu'], 400);
+            }
             if($this->imageService->create($request->input('id'),$request->file('image'))){
                 return response()->json(['message'=> 'tạo thành công'],200);
             }

@@ -22,7 +22,7 @@ class CateService{
         return $this->cateRepo->find($id,['children']);
 
     }
-
+    
     public function getAllCate(){
         return $this->cateRepo->allParent();
     }
