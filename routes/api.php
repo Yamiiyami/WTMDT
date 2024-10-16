@@ -112,6 +112,6 @@ Route::group([
     Route::get('getall',[ImageController::class,'index']);
     Route::get('getbyid/{id}',[ImageController::class,'show']);
     Route::post('create',[ImageController::class,'store']);
-    Route::put('update/{id}',[ImageController::class,'update']);
+    Route::post('update/{id}',[ImageController::class,'update']);
     Route::delete('delete/{id}',[ImageController::class,'destroy']);
 });

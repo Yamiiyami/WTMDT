@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Image\imagerequest;
 use App\Services\ImageService;
 use Exception;
 use Illuminate\Http\Request;
@@ -42,8 +43,9 @@ class ImageController extends Controller
         }
     }
 
-    public function update($id,Request $request){
+    public function update($id,imagerequest $request){
         try{
+            $request->validated();
             if (!$request->hasFile('image')) {
                 return response()->json(['message' => 'không tìm thấy ảnh trong yêu cầu'], 400);
             }
