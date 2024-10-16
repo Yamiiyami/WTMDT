@@ -1,7 +1,9 @@
 <?php
 namespace App\Services;
 
+use App\Models\Attribute;
 use App\Models\Product;
+use App\Repositories\Contracts\IImageRepository;
 use App\Repositories\Contracts\IProductRepository;
 use Exception;
 use Illuminate\Support\Facades\Log;
@@ -10,8 +12,10 @@ use PhpParser\Node\Stmt\Echo_;
 class ProductService{
 
     protected $productRepo;
-    public function __construct(IProductRepository $productRepo)
+    protected $imageRepo;
+    public function __construct(IProductRepository $productRepo, IImageRepository $imageRepo)
     {
+        $this->imageRepo = $imageRepo;
         $this->productRepo = $productRepo;
     }
 
@@ -29,7 +33,7 @@ class ProductService{
         $productArray = $product->toArray();
 
         $attributesList = [];
-        $allAttributes = \App\Models\Attribute::with('values')->get();
+        $allAttributes = Attribute::with('values')->get();
         foreach ($allAttributes as $attribute) {
             $attributesList[$attribute->name] = $attribute->values->pluck('value')->toArray();
         }
@@ -56,12 +60,12 @@ class ProductService{
         }
 
         return $productArray;
-
     }
 
     public function create(array $data){
         try{
             return $this->productRepo->create($data);
+
         }catch(Exception $e){
             throw new Exception($e->getMessage());
         }
@@ -75,6 +79,7 @@ class ProductService{
         }
     }
 
+    
     public function delete($id){
         try{
             return $this->productRepo->delete($id);
@@ -82,6 +87,7 @@ class ProductService{
             throw new Exception($e->getMessage());
         }
     }
+
 
 
 }

@@ -5,6 +5,7 @@ namespace App\Providers;
 use App\Repositories\Contracts\IAttributesRepository;
 use App\Repositories\Contracts\IAttributeValueRepository;
 use App\Repositories\Contracts\ICateRepository;
+use App\Repositories\Contracts\IImageRepository;
 use App\Repositories\Contracts\IProductRepository;
 use App\Repositories\Contracts\IProductVariantRepository;
 use app\Repositories\Contracts\IRoleRepository;
@@ -12,6 +13,7 @@ use App\Repositories\Contracts\IUserRepository;
 use App\Repositories\Eloquent\AttributesRepository;
 use App\Repositories\Eloquent\AttributeValueRepository;
 use App\Repositories\Eloquent\CateRepository;
+use App\Repositories\Eloquent\ImageRepository;
 use App\Repositories\Eloquent\ProductRepository;
 use App\Repositories\Eloquent\ProductVariantRepository;
 use app\Repositories\Eloquent\RoleRepository;
@@ -32,7 +34,7 @@ class RepositoryProvider extends ServiceProvider
 
         $this->app->bind(IAttributesRepository::class,AttributesRepository::class);
         $this->app->bind(IAttributeValueRepository::class,AttributeValueRepository::class);
-
+        $this->app->bind(IImageRepository::class,ImageRepository::class);
     }
     
 

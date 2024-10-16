@@ -4,6 +4,7 @@ use App\Http\Controllers\Api\AttributeController;
 use App\Http\Controllers\Api\AttributeValueController;
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CateController;
+use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductVariantController;
 use App\Http\Controllers\Api\RoleController;
@@ -101,4 +102,14 @@ Route::group([
     Route::post('create',[AttributeValueController::class,'store']);
     Route::put('update/{id}',[AttributeValueController::class,'update']);
     Route::delete('delete/{id}',[AttributeValueController::class,'destroy']);
+});
+
+Route::group([
+    'prefix' => 'image'
+],function($route){
+    Route::get('getall',[ImageController::class,'index']);
+    Route::get('getbyid/{id}',[ImageController::class,'show']);
+    Route::post('create',[ImageController::class,'store']);
+    Route::put('update/{id}',[ImageController::class,'update']);
+    Route::delete('delete/{id}',[ImageController::class,'destroy']);
 });

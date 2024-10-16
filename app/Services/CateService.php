@@ -1,13 +1,14 @@
 <?php
 namespace App\Services;
 
-use App\Repositories\Eloquent\CateRepository;
+use App\Repositories\Contracts\ICateRepository;
+
 use Exception;
 
 class CateService{
 
     protected $cateRepo;
-    public function __construct(CateRepository $cateRepo)
+    public function __construct(ICateRepository $cateRepo)
     {
         $this->cateRepo = $cateRepo;
     }

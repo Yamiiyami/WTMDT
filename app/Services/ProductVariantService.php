@@ -1,12 +1,12 @@
 <?php
 namespace App\Services;
 
-use App\Repositories\Eloquent\ProductVariantRepository;
+use App\Repositories\Contracts\IProductVariantRepository;
 use Exception;
 
 class ProductVariantService{
     protected $productVariantRepo;
-    public function __construct(ProductVariantRepository $productVariantRepo)
+    public function __construct(IProductVariantRepository $productVariantRepo)
     {
         $this->productVariantRepo = $productVariantRepo;
     }
