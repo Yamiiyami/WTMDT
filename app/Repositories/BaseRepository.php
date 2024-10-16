@@ -116,7 +116,7 @@ class BaseRepository
         }
         return $query->get();
     }
-
+    
     public function whereIn(string $column, array $values)
     {
         return $this->model->whereIn($column, $values)->get();

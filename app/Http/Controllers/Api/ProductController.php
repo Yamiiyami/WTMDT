@@ -25,6 +25,11 @@ class ProductController extends Controller
         return response()->json($cate);
     }
 
+    public function getByIdCate($id){
+        $products = $this->productService->getProductByIdCate($id);
+        return response()->json($products);
+    }
+
     public function store(Request $request){
 
         try{

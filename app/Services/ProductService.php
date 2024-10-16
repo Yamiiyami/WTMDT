@@ -3,6 +3,7 @@ namespace App\Services;
 
 use App\Models\Attribute;
 use App\Models\Product;
+use App\Repositories\Contracts\ICateRepository;
 use App\Repositories\Contracts\IImageRepository;
 use App\Repositories\Contracts\IProductRepository;
 use Exception;
@@ -13,10 +14,12 @@ class ProductService{
 
     protected $productRepo;
     protected $imageRepo;
-    public function __construct(IProductRepository $productRepo, IImageRepository $imageRepo)
+    protected $cateRepo;
+    public function __construct(IProductRepository $productRepo, IImageRepository $imageRepo, ICateRepository $cateRepo)
     {
         $this->imageRepo = $imageRepo;
         $this->productRepo = $productRepo;
+        $this->cateRepo = $cateRepo;
     }
 
     public function getAll(){
@@ -60,6 +63,16 @@ class ProductService{
         }
 
         return $productArray;
+    }
+
+    public function getProductByIdCate($id){
+        $cates = $this->cateRepo->getCategoryChildren($id);
+
+        $cateids = $cates->pluck('id')->toArray();
+        $cateids[] = $id;
+        $product = $this->productRepo->whereIn('category_id',$cateids);
+
+        return $product;
     }
 
     public function create(array $data){

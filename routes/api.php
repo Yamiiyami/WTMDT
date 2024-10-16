@@ -69,6 +69,8 @@ Route::group([
 ],function($route){
     Route::get('getall',[ProductController::class,'index']);
     Route::get('getbyid/{id}',[ProductController::class,'show']);
+    Route::get('getbycate/{id}',[ProductController::class,'getByIdCate']);
+
     Route::post('create',[ProductController::class,'store']);
     Route::put('update/{id}',[ProductController::class,'update']);
     Route::delete('delete/{id}',[ProductController::class,'destroy']);
