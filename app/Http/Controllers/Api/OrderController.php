@@ -37,7 +37,7 @@ class OrderController extends Controller
                 return response()->json(['message'=> 'tạo thành công'],200);
             }
             return response()->json(['message'=> 'tạo thất bại'],400);
-
+            
         }catch(Exception $e){
             return response()->json(['error'=>$e->getMessage()],500);
         }

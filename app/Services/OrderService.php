@@ -5,6 +5,7 @@ use App\Models\Order;
 use App\Repositories\Contracts\ICartRepository;
 use App\Repositories\Contracts\IOrderItemRepository;
 use App\Repositories\Contracts\IOrderRepository;
+use App\Repositories\Contracts\IProductVariantRepository;
 use Exception;
 use Illuminate\Support\Facades\DB;
 
@@ -14,8 +15,10 @@ class OrderService {
     protected $cartItemService;
     protected $orderItemRepo;
     protected $cartRepo;
-    public function __construct(IOrderRepository $orderRepo, CartItemService $cartItemService, IOrderItemRepository $orderItemRepo, ICartRepository $cartRepo)
+    protected $prodVrianRepo;
+    public function __construct(IOrderRepository $orderRepo, CartItemService $cartItemService, IOrderItemRepository $orderItemRepo, ICartRepository $cartRepo, IProductVariantRepository $prodVrianRepo)
     {
+        $this->prodVrianRepo = $prodVrianRepo;
         $this->cartRepo = $cartRepo;
         $this->orderItemRepo = $orderItemRepo;
         $this->cartItemService = $cartItemService;
@@ -78,6 +81,8 @@ class OrderService {
                 if(!$this->orderItemRepo->create($orderitem)){
                     throw new Exception('tạo order-sp không thành công');
                 }
+                $prodvari = $this->prodVrianRepo->find($cartitem->product_variant_id);
+                $this->prodVrianRepo->update($cartitem->product_variant_id,['quantity' => $prodvari->quantity -  $cartitem->quantity ]);
             }
             if(!$this->cartRepo->delete($cartitems[0]->cart_id)){
                 throw new Exception('xoá cart không thành công');
