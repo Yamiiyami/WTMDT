@@ -37,6 +37,14 @@ class BaseRepository
         return false;
     }
 
+    public function deleteWhere(array $conditions){
+        $query = $this->model->newQuery();
+        foreach($conditions as $column => $value ){
+            $query->where($column,$value);
+        }
+        return $query->delete();
+    }
+
     public function delete($id)
     {
         $record = $this->model->find($id);

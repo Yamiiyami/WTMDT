@@ -46,10 +46,8 @@ class ProductService{
             $variantAttributes = [];
             if (isset($variant['attributes']) && is_array($variant['attributes'])) {
                 foreach ($variant['attributes'] as $variantAttribute) {
-                    if (
-                        isset($variantAttribute['attribute']['name']) &&
-                        isset($variantAttribute['value']['value'])
-                    ) {
+                    if ( isset($variantAttribute['attribute']['name']) && isset($variantAttribute['value']['value'])) 
+                    {
                         $attributeName = $variantAttribute['attribute']['name'];
                         $attributeValue = $variantAttribute['value']['value'];
                         $variantAttributes[$attributeName] = $attributeValue;

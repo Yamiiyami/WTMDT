@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use App\Repositories\Contracts\ICartRepository;
+use App\Services\CartService;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -12,8 +15,17 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthController extends Controller
 {
+
+    protected $cartService;
+    protected $userService;
+    public function __construct(CartService $cartService, UserService $userService)
+    {
+        $this->userService = $userService;
+        $this->cartService = $cartService;
+    }
     public function register(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
@@ -31,7 +43,7 @@ class AuthController extends Controller
         ]);
 
         $token = JWTAuth::fromUser($user);
-
+        $this->cartService->create($user->id);
         return response()->json(compact('user','token'),201);
     }
 
@@ -74,7 +86,8 @@ class AuthController extends Controller
     public function me()
     {
         $user = auth()->user();
-        $roles = $user->getRoleNames();
+        $userr = $this->userService->getById($user->id);
+        $roles = $userr->getRoleNames();
         $user['role'] = $roles;
         return response()->json($user);
     }

@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\AttributeController;
 use App\Http\Controllers\Api\AttributeValueController;
 use App\Http\Controllers\Api\AuthController;
+use App\Http\Controllers\Api\CartItemController;
 use App\Http\Controllers\Api\CateController;
 use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\ProductController;
@@ -114,4 +115,12 @@ Route::group([
     Route::post('create',[ImageController::class,'store']);
     Route::post('update/{id}',[ImageController::class,'update']);
     Route::delete('delete/{id}',[ImageController::class,'destroy']);
+});
+
+Route::group([
+    'prefix' => 'cart-item'
+],function($route){
+    Route::get('getall',[CartItemController::class,'show']);
+    Route::post('create',[CartItemController::class,'store']);
+    Route::delete('delete/{id}',[CartItemController::class,'destroy']);
 });

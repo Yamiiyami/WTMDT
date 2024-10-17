@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Contracts\IAttributesRepository;
 use App\Repositories\Contracts\IAttributeValueRepository;
+use App\Repositories\Contracts\ICartItemsRepository;
+use App\Repositories\Contracts\ICartRepository;
 use App\Repositories\Contracts\ICateRepository;
 use App\Repositories\Contracts\IImageRepository;
 use App\Repositories\Contracts\IProductRepository;
@@ -12,6 +14,8 @@ use app\Repositories\Contracts\IRoleRepository;
 use App\Repositories\Contracts\IUserRepository;
 use App\Repositories\Eloquent\AttributesRepository;
 use App\Repositories\Eloquent\AttributeValueRepository;
+use App\Repositories\Eloquent\CartItemRepository;
+use App\Repositories\Eloquent\CartRepository;
 use App\Repositories\Eloquent\CateRepository;
 use App\Repositories\Eloquent\ImageRepository;
 use App\Repositories\Eloquent\ProductRepository;
@@ -35,6 +39,10 @@ class RepositoryProvider extends ServiceProvider
         $this->app->bind(IAttributesRepository::class,AttributesRepository::class);
         $this->app->bind(IAttributeValueRepository::class,AttributeValueRepository::class);
         $this->app->bind(IImageRepository::class,ImageRepository::class);
+        $this->app->bind(ICartRepository::class,CartRepository::class);
+        $this->app->bind(ICartItemsRepository::class,CartItemRepository::class);
+
+
     }
     
 
