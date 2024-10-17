@@ -39,7 +39,7 @@ class OrderService {
         }
         return $this->orderRepo->findAllBy('user_id',$user->id);
     }
-    
+
     public function create(array $order){
         DB::beginTransaction();
         try{
@@ -79,7 +79,7 @@ class OrderService {
                     throw new Exception('tạo order-sp không thành công');
                 }
             }
-            if(!$this->cartRepo->delete($cartitems->id)){
+            if(!$this->cartRepo->delete($cartitems[0]->cart_id)){
                 throw new Exception('xoá cart không thành công');
             }
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CartItemController;
 use App\Http\Controllers\Api\CateController;
 use App\Http\Controllers\Api\ImageController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductVariantController;
 use App\Http\Controllers\Api\RoleController;
@@ -122,4 +123,13 @@ Route::group([
     Route::get('getall',[CartItemController::class,'show']);
     Route::post('create',[CartItemController::class,'store']);
     Route::delete('delete/{id}',[CartItemController::class,'destroy']);
+});
+
+Route::group([
+    'prefix' => 'order'
+],function($route){
+    Route::get('getbyuser',[OrderController::class,'getByUser']);
+    Route::post('create',[OrderController::class,'store']);
+    Route::put('update/{id}',[OrderController::class,'update']);
+    Route::delete('delete/{id}',[OrderController::class,'destroy']);
 });

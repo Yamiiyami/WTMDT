@@ -29,11 +29,13 @@ class ProductService{
     public function getById($id){
         $product = Product::with([
             'images',
+            'category',
             'variants.attributes.attribute',
             'variants.attributes.value'
         ])->findOrFail($id);
         $product->makeHidden(['created_at', 'updated_at']);
-
+        $product->category->makeHidden(['created_at', 'updated_at']);
+        
         $product->images->makeHidden(['created_at', 'updated_at']);
         $product->variants->each(function ($variant) {
             $variant->makeHidden(['created_at', 'updated_at']);
