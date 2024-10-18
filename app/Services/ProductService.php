@@ -85,6 +85,13 @@ class ProductService{
 
     public function create(array $data){
         try{
+            $product = [
+                'name' => $data['name'], 
+                'description' =>$data['description'], 
+                'price' => $data['price'], 
+                'category_id' => $data['category_id'], 
+                'public'=>$data['public']
+            ];
             return $this->productRepo->create($data);
 
         }catch(Exception $e){

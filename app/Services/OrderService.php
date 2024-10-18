@@ -83,14 +83,12 @@ class OrderService {
                 }
                 $prodvari = $this->prodVrianRepo->find($cartitem->product_variant_id);
                 $this->prodVrianRepo->update($cartitem->product_variant_id,['quantity' => $prodvari->quantity -  $cartitem->quantity ]);
-            }
-            if(!$this->cartRepo->delete($cartitems[0]->cart_id)){
-                throw new Exception('xoá cart không thành công');
+                $this->cartItemService->delete($cartitem->id);
+                
             }
 
             DB::commit();
             return true;
-            
             
         }catch(Exception $e){
             DB::rollBack();

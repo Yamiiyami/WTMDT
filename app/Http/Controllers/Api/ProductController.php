@@ -33,6 +33,7 @@ class ProductController extends Controller
     public function store(Request $request){
 
         try{
+            
             if($this->productService->create($request->all())){
                 return response()->json(['message'=> 'tạo thành công'],200);
             }

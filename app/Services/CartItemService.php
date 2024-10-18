@@ -36,10 +36,10 @@ class CartItemService
     {
         $user = auth()->user();
         if(!$user){
-            throw new Exception('error : Invalid Credentials') ;
+            throw new Exception('error : chưa đăng nhập hoặc đăng ký',401);
         }
         $cart = $this->cartRepo->findBy('user_id', $user->id);
-        return $this->cartItemRepo->findAllBy('cart_id', $cart->id);
+        return $this->cartItemRepo->findAllBy('cart_id', $cart->id, ['productVariant:id,product_id,quantity,sku','productVariant.images:id,file_name,url,is_primary,product_variant_id'],['id','cart_id','product_variant_id','quantity','price']);
     }
 
     public function create(array $cartItem)
@@ -48,8 +48,9 @@ class CartItemService
 
             $user = auth()->user();
             if(!$user){
-                throw new Exception('error : Invalid Credentials');
+                throw new Exception('error : chưa đăng nhập',401);
             }
+
             $cart = $this->cartRepo->findBy('user_id',$user->id);
             $checkcart = $this->cartItemRepo->findWithWhere(['cart_id'=>$cart->id, 'product_variant_id'=>$cartItem['product_variant_id']]);
             if($checkcart){
@@ -89,7 +90,7 @@ class CartItemService
             $user = auth()->user();
             $cart = $this->cartRepo->findBy('user_id', $user->id);
 
-            return $this->cartItemRepo->deleteWhere([['cart_id'] => $cart->id,'id' => $id ]);
+            return $this->cartItemRepo->deleteWhere(['cart_id' => $cart->id,'id' => $id ]);
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }

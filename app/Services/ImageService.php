@@ -37,7 +37,7 @@ class ImageService {
                 'product_id' => $id,
                 'file_name' => $originalName,
                 'url' => $imagePath,
-
+                    
             ];
             if(!$this->imageRepo->create($image)){
                 throw new Exception('khong them dc anh !!');
