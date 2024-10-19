@@ -25,7 +25,7 @@ class ImageService {
 
     }
 
-    public function create($id, UploadedFile $picture){
+    public function create($id, $id_variant, UploadedFile $picture){
         DB::beginTransaction();
         try{
             $originalName = $picture->getClientOriginalName();
@@ -35,9 +35,10 @@ class ImageService {
             }
             $image = [
                 'product_id' => $id,
+                'product_variant_id' => $id_variant,
                 'file_name' => $originalName,
                 'url' => $imagePath,
-                    
+                
             ];
             if(!$this->imageRepo->create($image)){
                 throw new Exception('khong them dc anh !!');

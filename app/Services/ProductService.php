@@ -81,7 +81,6 @@ class ProductService
     public function getProductByIdCate($id)
     {
         $cates = $this->cateRepo->getCategoryChildren($id);
-
         $cateids = $cates->pluck('id')->toArray();
         $cateids[] = $id;
         $product = $this->productRepo->whereIn(['images'], 'category_id', $cateids);
@@ -154,7 +153,6 @@ class ProductService
         }
     }
 
-
     public function delete($id)
     {
         try {
@@ -163,4 +161,5 @@ class ProductService
             throw new Exception($e->getMessage());
         }
     }
+
 }
