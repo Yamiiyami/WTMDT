@@ -30,6 +30,14 @@ class ProductController extends Controller
         return response()->json($products);
     }
 
+    public function pagein($id){
+        return $this->productService->paginate($id);
+    }
+
+    public function search(Request $request){
+        return $this->productService->search($request->input('keyword'));
+    }
+
     public function store(Request $request){
 
         try{

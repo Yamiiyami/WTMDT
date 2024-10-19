@@ -70,6 +70,9 @@ Route::group([
 ],function($route){
     Route::get('getall',[ProductController::class,'index']);
     Route::get('getbyid/{id}',[ProductController::class,'show']);
+    Route::get('pagein/{id}',[ProductController::class,'pagein']);
+    Route::get('search',[ProductController::class,'search']);
+
     Route::get('getbycate/{id}',[ProductController::class,'getByIdCate']);
 
     Route::post('create',[ProductController::class,'store']);

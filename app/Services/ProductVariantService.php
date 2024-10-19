@@ -23,6 +23,7 @@ class ProductVariantService{
 
     public function create(array $data){
         try{
+            
             return $this->productVariantRepo->create($data);
         }catch(Exception $e){
             throw new Exception($e->getMessage());

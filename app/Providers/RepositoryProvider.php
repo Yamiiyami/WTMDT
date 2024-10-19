@@ -14,6 +14,7 @@ use App\Repositories\Contracts\IProductRepository;
 use App\Repositories\Contracts\IProductVariantRepository;
 use app\Repositories\Contracts\IRoleRepository;
 use App\Repositories\Contracts\IUserRepository;
+use App\Repositories\Contracts\IVariantAttributeRepository;
 use App\Repositories\Eloquent\AttributesRepository;
 use App\Repositories\Eloquent\AttributeValueRepository;
 use App\Repositories\Eloquent\CartItemRepository;
@@ -26,6 +27,7 @@ use App\Repositories\Eloquent\ProductRepository;
 use App\Repositories\Eloquent\ProductVariantRepository;
 use app\Repositories\Eloquent\RoleRepository;
 use App\Repositories\Eloquent\UserRepository;
+use App\Repositories\Eloquent\VariantAttributeRepository;
 use Illuminate\Support\ServiceProvider;
 
 class RepositoryProvider extends ServiceProvider
@@ -48,6 +50,7 @@ class RepositoryProvider extends ServiceProvider
 
         $this->app->bind(IOrderRepository::class,OrderRepsitory::class);
         $this->app->bind(IOrderItemRepository::class,OrderItemRepository::class);
+        $this->app->bind(IVariantAttributeRepository::class,VariantAttributeRepository::class);
 
 
     }

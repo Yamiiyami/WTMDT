@@ -72,9 +72,9 @@ class BaseRepository
         return $query->first();
     }
 
-    public function paginate(int $perPage = 15)
+    public function paginate(int $perPage = 15, $relations=[])
     {
-        return $this->model->paginate($perPage);
+        return $this->model->with($relations)->paginate($perPage);
     }
 
     public function count()
@@ -116,13 +116,13 @@ class BaseRepository
         return $query->exists();
     }
 
-    public function search(array $columns, string $keyword)
+    public function search(array $columns, string $keyword,$relations=[] , $select=['*'] )
     {
         $query = $this->model->query();
         foreach ($columns as $column) {
             $query->orWhere($column, 'like', '%' . $keyword . '%');
         }
-        return $query->get();
+        return $query->with($relations)->select($select)->get();
     }
     
     public function whereIn($relations = [], string $column, array $values)
