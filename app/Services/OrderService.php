@@ -44,7 +44,7 @@ class OrderService
         if (!$user) {
             throw new Exception('error : Invalid Credentials');
         }
-        return $this->orderRepo->findAllBy('user_id', $user->id);
+        return $this->orderRepo->findAllBy('user_id', $user->id,['items']);
     }
 
     public function create(array $order)
@@ -56,7 +56,7 @@ class OrderService
                 throw new Exception('error : Invalid Credentials');
             }
             $cartitems = $this->cartItemService->getByIdUser();
-            if (!$cartitems) {
+            if ($cartitems->isEmpty()) {
                 throw new Exception('không có sản phẩm');
             }
             $totalprice = $cartitems->sum(function ($cartitem) {
