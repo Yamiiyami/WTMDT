@@ -61,6 +61,10 @@ class CartItemService
 
             $cart = $this->cartRepo->findBy('user_id', $user->id);
             $checkcart = $this->cartItemRepo->findWithWhere(['cart_id' => $cart->id, 'product_variant_id' => $cartItem['product_variant_id']]);
+            $product = $this->prodVarianRepo->find($cartItem['product_variant_id']);
+            if( $cartItem['quantity'] > $product['quantity'] ){
+                throw new Exception('số lượng sản phẩm không đủ');
+            }
             if ($checkcart) {
                 $checkcart['quantity'] += $cartItem['quantity'];
                 if ($this->cartItemRepo->update($checkcart->id, ['quantity' => $checkcart['quantity']])) {
