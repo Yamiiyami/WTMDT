@@ -64,7 +64,7 @@ class CartItemService
             $product = $this->prodVarianRepo->find($cartItem['product_variant_id']);
             $checkcartQuantity = $checkcart ? $checkcart->quantity : 0;
             if( $cartItem['quantity'] > $product['quantity'] || $checkcartQuantity + $cartItem['quantity'] > $product['quantity']  ){
-                throw new Exception('số lượng sản phẩm không đủ');
+                throw new Exception('số lượng sản phẩm không đủ',400);
             }
             if ($checkcart) {
                 $checkcart['quantity'] += $cartItem['quantity'];
