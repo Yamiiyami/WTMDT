@@ -87,6 +87,9 @@ class OrderService
                     throw new Exception('tạo order-sp không thành công');
                 }
                 $prodvari = $this->prodVrianRepo->find($cartitem->product_variant_id);
+                if($prodvari->quantity <  $cartitem->quantity){
+                    throw new Exception('số lượng sản phẩm không đủ');
+                }
                 $this->prodVrianRepo->update($cartitem->product_variant_id, ['quantity' => $prodvari->quantity -  $cartitem->quantity]);
                 $this->cartItemService->delete($cartitem->id);
             }
