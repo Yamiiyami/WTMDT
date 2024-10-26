@@ -10,7 +10,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 class User extends Authenticatable implements JWTSubject
 {
     use HasFactory,HasRoles;
-    protected $fillable = ['name','email','password','status',];
+    protected $fillable = ['name','email','password','phone','status',];
     protected $hidden = ['password'];
 
     public function carts()
