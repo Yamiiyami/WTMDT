@@ -27,7 +27,6 @@ class OrderService
         $this->orderRepo = $orderRepo;
     }
 
-
     public function getAll()
     {
         return $this->orderRepo->all();

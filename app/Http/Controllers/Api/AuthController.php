@@ -72,8 +72,10 @@ class AuthController extends Controller
             return response()->json(['error' => 'Failed to logout, please try again.'], 500);
         }
     }
+
     public function refresh()
     {
+        
         try {
             $newToken = JWTAuth::parseToken()->refresh();
             return response()->json([
@@ -82,7 +84,9 @@ class AuthController extends Controller
         } catch (JWTException $e) {
             return response()->json(['error' => 'Could not refresh token'], 500);
         }
+
     }
+
     public function me()
     {
         $user = auth()->user();
