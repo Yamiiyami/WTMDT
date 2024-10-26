@@ -41,7 +41,7 @@ class AuthController extends Controller
             'email' => $request->get('email'),
             'password' => Hash::make($request->get('password')),
         ]);
-
+        $user->assignRole('customer');
         $token = JWTAuth::fromUser($user);
         $this->cartService->create($user->id);
         return response()->json(compact('user','token'),201);

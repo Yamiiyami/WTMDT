@@ -21,7 +21,9 @@ class userRequest extends FormRequest
             'email' => 'required|string|email|unique:users,email',
             'password' => 'required|string|min:6',
             'phone' => 'nullable|string|digits_between:10,15',
-            'status' => 'nullable|in:active,inactive'
+            'status' => 'nullable|in:active,inactive',
+            'role' => 'nullable|in:admin,manager,staff,customer'
+
         ];
     }
 

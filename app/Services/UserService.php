@@ -30,7 +30,10 @@ class UserService {
             if (isset($user['password'])) {
                 $user['password'] = Hash::make($user['password']);
             }
-            return $this->userRepository->create($user);
+             
+            $userr = $this->userRepository->create($user);
+            $userr->assignRole($user['role']);
+            return true;
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }
@@ -49,7 +52,7 @@ class UserService {
             throw new Exception($e->getMessage());
         }
     }
-    
+
 
     public function delete($id)
     {
