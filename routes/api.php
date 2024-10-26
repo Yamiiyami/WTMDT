@@ -9,7 +9,7 @@ use App\Http\Controllers\Api\ImageController;
 use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\ProductController;
 use App\Http\Controllers\Api\ProductVariantController;
-use App\Http\Controllers\Api\RoleController;
+use App\Http\Controllers\Api\RoleeController;
 use App\Http\Controllers\Api\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -46,12 +46,12 @@ Route::put('/users/{id}/roles/sync', [UserController::class, 'syncRoles']);
 Route::group([
     'prefix' => 'role'
 ],function($route){
-    Route::get('getall',[RoleController::class,'index']);
-    Route::get('getbyid/{id}',[RoleController::class,'show']);
+    Route::get('getall',[RoleeController::class,'index']);
+    Route::get('getbyid/{id}',[RoleeController::class,'show']);
 
-    Route::post('create',[RoleController::class,'store']);
-    Route::put('update/{id}',[RoleController::class,'update']);
-    Route::delete('delete/{id}',[RoleController::class,'destroy']);
+    Route::post('create',[RoleeController::class,'store']);
+    Route::put('update/{id}',[RoleeController::class,'update']);
+    Route::delete('delete/{id}',[RoleeController::class,'destroy']);
 });
 
 Route::group([

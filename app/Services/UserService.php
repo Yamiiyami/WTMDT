@@ -2,8 +2,8 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\IUserRepository;
-use Exception;
 use Illuminate\Support\Facades\Hash;
+use Exception;
 
 
 class UserService {
@@ -47,7 +47,13 @@ class UserService {
             } else {
                 unset($user['password']);
             }
-            return $this->userRepository->update($id, $user);
+            $this->userRepository->update($id, $user);
+            $userr = $this->userRepository->find($id);
+            if (!$userr) {
+                throw new Exception('không tìm thấy user');
+            }
+            $userr->syncRoles($user['roles']);
+            return true;
         } catch (Exception $e) {
             throw new Exception($e->getMessage());
         }

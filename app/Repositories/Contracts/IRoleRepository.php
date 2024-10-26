@@ -1,5 +1,5 @@
 <?php
-namespace app\Repositories\Contracts;
+namespace App\Repositories\Contracts;
 
 interface IRoleRepository{
     public function all($relations=[]);

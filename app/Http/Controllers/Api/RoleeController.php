@@ -1,15 +1,14 @@
 <?php
-
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use app\Services\RoleService;
+use App\Services\RoleeService;
 use Illuminate\Http\Request;
 
-class RoleController extends Controller
+class RoleeController extends Controller
 {
     protected $roleService;
-    public function __construct(RoleService $roleService)
+    public function __construct(RoleeService $roleService)
     {
         $this->roleService = $roleService;
     }

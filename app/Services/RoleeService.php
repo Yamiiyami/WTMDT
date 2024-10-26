@@ -1,10 +1,10 @@
 <?php
-namespace app\Services;
+namespace App\Services;
 
-use app\Repositories\Contracts\IRoleRepository;
+use App\Repositories\Contracts\IRoleRepository;
 use Exception;
 
-class RoleService{
+class RoleeService{
     protected $roleRepo;
     public function __construct(IRoleRepository $roleRepo)
     {

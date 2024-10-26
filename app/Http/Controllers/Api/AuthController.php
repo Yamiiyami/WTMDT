@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use App\Repositories\Contracts\ICartRepository;
 use App\Services\CartService;
 use App\Services\UserService;
 use Illuminate\Http\Request;

@@ -1,8 +1,8 @@
 <?php
-namespace app\Repositories\Eloquent;
+namespace App\Repositories\Eloquent;
 
 use App\Repositories\BaseRepository;
-use app\Repositories\Contracts\IRoleRepository;
+use App\Repositories\Contracts\IRoleRepository;
 use Spatie\Permission\Models\Role;
 
 class RoleRepository extends BaseRepository implements IRoleRepository {
@@ -10,7 +10,5 @@ class RoleRepository extends BaseRepository implements IRoleRepository {
     {
         parent::__construct($model);
     }
-
-
     
 }
