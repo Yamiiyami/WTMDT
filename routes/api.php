@@ -39,7 +39,7 @@ Route::delete('/users/delete/{id}', [UserController::class, 'destroy']);
 
 Route::post('/users/{id}/roles', [UserController::class, 'assignRole']); 
 Route::delete('/users/{id}/roles', [UserController::class, 'removeRole']); 
-Route::put('/users/{id}/roles/sync', [UserController::class, 'syncRoles']); 
+Route::put('/users/{id}/roles/sync', [UserController::class, 'syncRoles']);
 
 });
 

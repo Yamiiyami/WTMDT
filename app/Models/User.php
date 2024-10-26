@@ -11,7 +11,7 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasFactory,HasRoles;
     protected $fillable = ['name','email','password','status',];
-    protected $hidden = ['password', 'roles',];
+    protected $hidden = ['password'];
 
     public function carts()
     {

@@ -15,6 +15,7 @@ class UserController extends Controller
     {
         $this->userService = $userService;
     }
+
     public function index(){
         try{
              $users = $this->userService->getAll();
@@ -22,7 +23,7 @@ class UserController extends Controller
         }catch(Exception $e){
             return response()->json(['error'=>$e->getMessage()],500);
         }
-
+        
     }
 
     public function show($id){

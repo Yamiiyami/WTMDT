@@ -16,12 +16,12 @@ class UserService {
 
     public function getAll()
     {
-        return $this->userRepository->all();
+        return $this->userRepository->all('roles:id,name');
     }
 
     public function getById($id)
     {
-        return $this->userRepository->find($id,'roles');
+        return $this->userRepository->find($id,'roles:id,name');
     }
 
     public function create(array $user)

@@ -2,7 +2,7 @@
 namespace App\Repositories\Contracts;
 
 interface IUserRepository {
-    public function all($relations=[]);
+    public function all($relations=[],$colums =['*']);
     public function find($id,$relations=[]);
     public function create(array $data);
     public function update($id, array $data);

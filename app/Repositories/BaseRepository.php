@@ -11,9 +11,9 @@ class BaseRepository
         $this->model = $model;
     }
 
-    public function all($relations = [])
+    public function all($relations = [],$columns = ['*'])
     {
-        return $this->model->with($relations)->get();
+        return $this->model->with($relations)->select($columns)->get();
     }
 
     public function find($id,$relations=[])
