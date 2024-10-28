@@ -11,8 +11,14 @@ class User extends Authenticatable implements JWTSubject
 {
     use HasFactory,HasRoles;
     protected $fillable = ['name','email','password','phone','status',];
-    protected $hidden = ['password'];
+    protected $appends = ['ten']; // Thêm 'ten' vào JSON trả về
+    protected $hidden = ['password','name'];
 
+    // Accessor cho 'ten' lấy giá trị từ 'name'
+    public function getTenAttribute()
+    {
+        return $this->attributes['name'];
+    }
     public function carts()
     {
         return $this->hasMany(Cart::class);
