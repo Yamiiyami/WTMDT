@@ -4,7 +4,7 @@ namespace App\Services;
 use App\Repositories\Contracts\IUserRepository;
 use Illuminate\Support\Facades\Hash;
 use Exception;
-
+use Illuminate\Support\Facades\DB;
 
 class UserService {
 
@@ -41,6 +41,7 @@ class UserService {
 
     public function update($id, array $user)
     {
+        DB::beginTransaction();
         try {
             if (isset($user['password'])) {
                 $user['password'] = Hash::make($user['password']);
@@ -52,9 +53,12 @@ class UserService {
             if (!$userr) {
                 throw new Exception('không tìm thấy user');
             }
-            $userr->syncRoles($user['roles']);
+            $userr->syncRoles($user['role']);
+            DB::commit();
             return true;
+
         } catch (Exception $e) {
+            DB::rollBack();
             throw new Exception($e->getMessage());
         }
     }
