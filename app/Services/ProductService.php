@@ -38,7 +38,7 @@ class ProductService
 
     public function getAll()
     {
-        return $this->productRepo->all(['images']);
+        return $this->productRepo->all(['images','category:id,name']);
     }
 
     public function getById($id)
