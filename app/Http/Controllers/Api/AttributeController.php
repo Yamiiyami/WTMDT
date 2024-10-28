@@ -38,6 +38,17 @@ class AttributeController extends Controller
         }
     }
 
+    public function createAttriValue(Request $request){
+        try{
+            if($this->attributeService->addAttribute($request->all())){
+                return response()->json(['message'=> 'tạo thành công'],200);
+            }
+            return response()->json(['message'=> 'tạo thất bại'],400);
+
+        }catch(Exception $e){
+            return response()->json(['error'=>$e->getMessage()],500);
+        }
+    }
     public function update($id,Request $request){
         try{
             if($this->attributeService->update($id,$request->all())){

@@ -96,6 +96,7 @@ Route::group([
     Route::get('getall',[AttributeController::class,'index']);
     Route::get('getbyid/{id}',[AttributeController::class,'show']);
     Route::post('create',[AttributeController::class,'store']);
+    Route::post('create_value',[AttributeController::class,'createAttriValue']);
     Route::put('update/{id}',[AttributeController::class,'update']);
     Route::delete('delete/{id}',[AttributeController::class,'destroy']);
 });

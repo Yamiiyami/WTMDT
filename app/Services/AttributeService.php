@@ -2,14 +2,17 @@
 namespace App\Services;
 
 use App\Repositories\Contracts\IAttributesRepository;
+use App\Repositories\Contracts\IAttributeValueRepository;
 use Exception;
+use Illuminate\Support\Facades\DB;
 
 class AttributeService {
     protected $attributeRepo;
-
-    public function __construct(IAttributesRepository $attributeRepo)
+    protected $attribuValueRepo;
+    public function __construct(IAttributesRepository $attributeRepo, IAttributeValueRepository $attribuValueRepo)
     {
         $this->attributeRepo = $attributeRepo;
+        $this->attribuValueRepo = $attribuValueRepo;
     }
 
     public function getAll(){
@@ -32,6 +35,22 @@ class AttributeService {
         try{
             return $this->attributeRepo->update($id,$data);
         }catch(Exception $e){
+            throw new Exception($e->getMessage());
+        }
+    }
+
+    public function addAttribute(array $data){
+        DB::beginTransaction();
+        try{
+            $attribute = $this->attributeRepo->create(['name'=>$data['name']]);
+            foreach($data['values'] as $value){
+                $this->attribuValueRepo->create(['value' => $value['value'], 'attribute_id' => $attribute->id]);
+            }
+
+            DB::commit();
+            return true;
+        }catch(Exception $e){
+            DB::rollBack();
             throw new Exception($e->getMessage());
         }
     }
