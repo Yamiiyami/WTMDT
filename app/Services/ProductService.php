@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Models\Attribute;
 use App\Models\Product;
+use App\Repositories\Contracts\IAttributeValueRepository;
 use App\Repositories\Contracts\ICateRepository;
 use App\Repositories\Contracts\IImageRepository;
 use App\Repositories\Contracts\IProductRepository;
@@ -21,19 +22,22 @@ class ProductService
     protected $cateRepo;
     protected $prodVariantRepo;
     protected $variAttributeRepo;
+    protected $attriValueRepo;
 
     public function __construct(
         IProductRepository $productRepo,
         IImageRepository $imageRepo,
         ICateRepository $cateRepo,
         IProductVariantRepository $prodVariantRepo,
-        IVariantAttributeRepository $variAttributeRepo
+        IVariantAttributeRepository $variAttributeRepo,
+        IAttributeValueRepository $attriValueRepo
     ) {
         $this->variAttributeRepo = $variAttributeRepo;
         $this->prodVariantRepo = $prodVariantRepo;
         $this->imageRepo = $imageRepo;
         $this->productRepo = $productRepo;
         $this->cateRepo = $cateRepo;
+        $this->attriValueRepo = $attriValueRepo;
     }
 
     public function getAll()
@@ -103,7 +107,6 @@ class ProductService
 
         DB::beginTransaction();
         try {
-
             $prod = [
                 'name' => $data['name'],
                 'description' => $data['description'],
@@ -130,7 +133,8 @@ class ProductService
                     'product_variant_id' => $prodVariant->id,
                 ];
                 foreach ($variantData['atributes'] as $attribute) {
-                    $attriValue['attribute_id'] = $attribute['style'];
+                    $atrivalue = $this->attriValueRepo->find($attribute['value']);
+                    $attriValue['attribute_id'] = $atrivalue->attribute_id;
                     $attriValue['attribute_value_id'] = $attribute['value'];
                     $this->variAttributeRepo->create($attriValue);
                 }
