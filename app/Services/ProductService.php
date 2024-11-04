@@ -139,7 +139,6 @@ class ProductService
                     $this->variAttributeRepo->create($attriValue);
                 }
             }
-
             DB::commit();
             return true;
         } catch (Exception $e) {
