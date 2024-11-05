@@ -132,7 +132,7 @@ class ProductService
                 $attriValue = [
                     'product_variant_id' => $prodVariant->id,
                 ];
-                foreach ($variantData['atributes'] as $attribute) {
+                foreach ($variantData['attributes'] as $attribute) {
                     $atrivalue = $this->attriValueRepo->find($attribute['value']);
                     $attriValue['attribute_id'] = $atrivalue->attribute_id;
                     $attriValue['attribute_value_id'] = $attribute['value'];
